@@ -9,6 +9,8 @@ class CompanyExperience extends React.Component {
 
         const position = this.props.position;
         let rbID = 'rb-' + position.id;
+        let yFID = 'yf-' + position.id;
+        let yTID = 'yt-' + position.id;
         return (
             <div>
                 <label>
@@ -18,6 +20,24 @@ class CompanyExperience extends React.Component {
                         id={position.id}
                         className="positionInput"
                         value={position.title}
+                        onChange={this.props.handleInputChange} />
+                </label>
+                <label>
+                    From:
+                    <input
+                        type="text"
+                        id={yFID}
+                        className="positionYearFromInput"
+                        value={position.years[0]}
+                        onChange={this.props.handleInputChange} />
+                </label>
+                <label>
+                    To:
+                    <input
+                        type="text"
+                        id={yTID}
+                        className="positionYearToInput"
+                        value={position.years[1]}
                         onChange={this.props.handleInputChange} />
                 </label>
                 {position.responsibilities.map((responsibility) => {

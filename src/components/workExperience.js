@@ -24,6 +24,7 @@ class WorkExperience extends React.Component {
                 positions: [{
                     title: '',
                     id: uniqid(),
+                    years: ['', ''],
                     responsibilities: [{
                         text: '',
                         id: uniqid(),
@@ -44,6 +45,7 @@ class WorkExperience extends React.Component {
                         positions: company.positions.concat({
                             title: '',
                             id: uniqid(),
+                            years: ['', ''],
                             responsibilities: [{
                                 text: '',
                                 id: uniqid(),
@@ -70,6 +72,7 @@ class WorkExperience extends React.Component {
                                 return {
                                     title: position.title,
                                     id: position.id,
+                                    years: position.years,
                                     responsibilities: position.responsibilities.concat({
                                         text: '',
                                         id: uniqid(),
@@ -114,6 +117,7 @@ class WorkExperience extends React.Component {
                                     return {
                                         title: e.target.value,
                                         id: position.id,
+                                        years: position.years,
                                         responsibilities: position.responsibilities,
                                     }
                                 }
@@ -148,6 +152,7 @@ class WorkExperience extends React.Component {
                                     return {
                                         title: position.title,
                                         id: position.id,
+                                        years: position.years,
                                         responsibilities: position.responsibilities.map((responsibility) => {
                                             if (responsibility.id === e.target.id) {
                                                 return {
@@ -157,6 +162,57 @@ class WorkExperience extends React.Component {
                                             }
                                             return responsibility;
                                         })
+                                    }
+                                }
+                                return position;
+                            })
+                        }
+                    }
+                    return company;
+                })
+            })
+        }
+
+        if (e.target.className === 'positionYearFromInput') {
+            this.setState({
+                companies: this.state.companies.map((company) => {
+                    let match = company.positions.findIndex((position) => position.id === e.target.id);
+                    if (match !== -1) {
+                        return {
+                            name: company.name,
+                            id: company.id,
+                            positions: company.positions.map((position) => {
+                                if (position.id === e.target.id) {
+                                    return {
+                                        title: position.title,
+                                        id: position.id,
+                                        years: [e.target.value, position.years[1]],
+                                        responsibilities: position.responsibilities,
+                                    }
+                                }
+                                return position;
+                            })
+                        }
+                    }
+                    return company;
+                })
+            })
+        }
+        if (e.target.className === 'positionYearToInput') {
+            this.setState({
+                companies: this.state.companies.map((company) => {
+                    let match = company.positions.findIndex((position) => position.id === e.target.id);
+                    if (match !== -1) {
+                        return {
+                            name: company.name,
+                            id: company.id,
+                            positions: company.positions.map((position) => {
+                                if (position.id === e.target.id) {
+                                    return {
+                                        title: position.title,
+                                        id: position.id,
+                                        years: [position.years[1], e.target.value],
+                                        responsibilities: position.responsibilities,
                                     }
                                 }
                                 return position;
