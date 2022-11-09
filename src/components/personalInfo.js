@@ -8,8 +8,11 @@ class PersonalInfo extends React.Component {
             name: '',
             email: '',
             phone: '',
+            saved: false,
         }
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.save = this.save.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     handleInputChange(e) {
@@ -18,17 +21,48 @@ class PersonalInfo extends React.Component {
         })
     }
 
+    save(e) {
+        e.preventDefault();
+        this.setState({
+            saved: true,
+        })
+    }
+
+    edit(e) {
+        e.preventDefault();
+        this.setState({
+            saved: false,
+        })
+    }
+    
     render() {
+        if (this.state.saved) {
+            return (
+                <div className="personalInfoContainer">
+                    <div className="nameBox">
+                        <p className="nameText">{this.state.name}</p>
+                    </div>
+                    <div className="infoBox">
+                        <div className="subInfoBox">
+                            <p className="emailText">{this.state.email}</p>
+                        </div>
+                        <div className="subInfoBox">
+                            <p className="phoneText">{this.state.phone}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
         return (
-            <div>
-                <div className="nameDiv">
+            <div className="personalInfoContainer">
+                <div className="nameBox">
                     <input
                         type="text"
                         name="name"
                         value={this.state.name}
                         onChange={this.handleInputChange} />
                 </div>
-                <div className="infoDiv">
+                <div className="infoBox">
                     <input
                         type="email"
                         name="email"

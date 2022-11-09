@@ -13,7 +13,8 @@ class Education extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    addSchool() {
+    addSchool(e) {
+        e.preventDefault();
         this.setState({
             schools: this.state.schools.concat({
                 name: '',

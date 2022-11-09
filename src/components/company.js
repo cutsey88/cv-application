@@ -11,7 +11,7 @@ class Company extends React.Component {
         const company = this.props.company;
         let pbID = 'pb-' + company.id;
         return (
-            <div>
+            <div className="companyBox">
                 <label>
                     Company Name:
                     <input
@@ -21,15 +21,17 @@ class Company extends React.Component {
                         value={company.name}
                         onChange={this.props.handleInputChange} />
                 </label>
-                {company.positions.map((position) => {
-                        return (
-                            <CompanyExperience
-                                position={position}
-                                key={position.id}
-                                handleInputChange={this.props.handleInputChange}
-                                addResponsibility={this.props.addResponsibility} />
-                        )
-                    })}
+                <div className="positionsContainer">
+                    {company.positions.map((position) => {
+                            return (
+                                <CompanyExperience
+                                    position={position}
+                                    key={position.id}
+                                    handleInputChange={this.props.handleInputChange}
+                                    addResponsibility={this.props.addResponsibility} />
+                            )
+                        })}
+                </div>
                 <button className="addPositionButton" id={pbID} onClick={this.props.addPosition}>Add position</button>
             </div>
         );

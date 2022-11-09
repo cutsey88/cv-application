@@ -12,7 +12,7 @@ class CompanyExperience extends React.Component {
         let yFID = 'yf-' + position.id;
         let yTID = 'yt-' + position.id;
         return (
-            <div>
+            <div className="positionBox">
                 <label>
                     Position:
                     <input
@@ -40,15 +40,17 @@ class CompanyExperience extends React.Component {
                         value={position.years[1]}
                         onChange={this.props.handleInputChange} />
                 </label>
-                {position.responsibilities.map((responsibility) => {
-                    return <input
-                                type="text"
-                                key={responsibility.id}
-                                id={responsibility.id}
-                                className="responsibilityInput"
-                                value={responsibility.text}
-                                onChange={this.props.handleInputChange} />
-                })}
+                <div className="responsibilitiesContainer">
+                    {position.responsibilities.map((responsibility) => {
+                        return <input
+                                    type="text"
+                                    key={responsibility.id}
+                                    id={responsibility.id}
+                                    className="responsibilityInput"
+                                    value={responsibility.text}
+                                    onChange={this.props.handleInputChange} />
+                    })}
+                </div>
                 <button
                     className="addResponsibilityButton"
                     id={rbID}

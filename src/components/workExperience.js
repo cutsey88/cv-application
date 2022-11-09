@@ -1,6 +1,7 @@
 import React from 'react';
 import Company from './company';
 import uniqid from 'uniqid';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 class WorkExperience extends React.Component {
     constructor(props) {
@@ -16,7 +17,8 @@ class WorkExperience extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    addCompany() {
+    addCompany(e) {
+        e.preventDefault();
         this.setState({
             companies: this.state.companies.concat({
                 name: '',
@@ -35,6 +37,7 @@ class WorkExperience extends React.Component {
     }
 
     addPosition(e) {
+        e.preventDefault();
         let companyID = e.target.id.slice(3);
         this.setState({
             companies: this.state.companies.map((company) => {
@@ -59,6 +62,7 @@ class WorkExperience extends React.Component {
     }
 
     addResponsibility(e) {
+        e.preventDefault();
         let positionID = e.target.id.slice(3);
         this.setState({
             companies: this.state.companies.map((company) => {
@@ -89,149 +93,65 @@ class WorkExperience extends React.Component {
     }
 
     handleInputChange(e) {
-        if (e.target.className === 'companyNameInput') {
-            this.setState({
-                companies: this.state.companies.map((company) => {
-                    if (company.id === e.target.id) {
-                        return {
-                            name: e.target.value,
-                            id: company.id,
-                            positions: company.positions,
-                        }
-                    }
-                    return company
-                })
-            })
-        }
 
-        if (e.target.className === 'positionInput') {
-            this.setState({
-                companies: this.state.companies.map((company) => {
-                    let match = company.positions.findIndex((position) => position.id === e.target.id);
-                    if (match !== -1) {
-                        return {
-                            name: company.name,
-                            id: company.id,
-                            positions: company.positions.map((position) => {
-                                if (position.id === e.target.id) {
+        this.setState({
+            companies: this.state.companies.map((company) => {
+                let companyID = e.target.id === company.id ? company.id : null;
+                if (companyID) {
+                    return {
+                        name: e.target.value,
+                        id: company.id,
+                        positions: company.positions,
+                    }
+                }
+
+                return {
+                    name: company.name,
+                    id: company.id,
+                    positions: company.positions.map((position) => {
+                        let positionID = e.target.id === position.id || e.target.id.slice(3) === position.id ? position.id : null;
+                        let idType = e.target.id.slice(2, 3) === '-' ? e.target.id.slice(0, 3) : 'PorR';
+                        let yearCheck = position.years;
+                        if (idType.slice(0,1) === 'y') {
+                            yearCheck = idType === 'yf-' ? [e.target.value, position.years[1]] : [position.years[0], e.target.value]; 
+                        }
+                        if (positionID) {
+                            return {
+                                title: idType === 'PorR' ? e.target.value : position.title,
+                                id: position.id,
+                                years: yearCheck,
+                                responsibilities: position.responsibilities,
+                            }
+                        }
+                        let rMatch = position.responsibilities.findIndex((res) => res.id === e.target.id);
+
+                        if (rMatch !== -1) {
+                            return {
+                                title: position.title,
+                                id: position.id,
+                                years: position.years,
+                                responsibilities: position.responsibilities.map((res) => {
                                     return {
-                                        title: e.target.value,
-                                        id: position.id,
-                                        years: position.years,
-                                        responsibilities: position.responsibilities,
+                                        text: e.target.id === res.id ? e.target.value : res.text,
+                                        id: res.id,
                                     }
-                                }
-                                return position;
-                            })
+                                })
+                            }
                         }
-                    }
-                    return company;
-                })
-            })
-        }
-
-        if (e.target.className === 'responsibilityInput') {
-            this.setState({
-                companies: this.state.companies.map((company) => {
-                    let match = company.positions.findIndex(function(position) {
-                        let resMatch = position.responsibilities.findIndex((responsibility) =>
-                            responsibility.id === e.target.id
-                        )
-                        if (resMatch !== -1) {
-                            return true;
-                        }
-                        return false;
+                        return position;
                     })
-                    if (match !== -1) {
-                        return {
-                            name: company.name,
-                            id: company.id,
-                            positions: company.positions.map((position) => {
-                                let rMatch = position.responsibilities.findIndex((res) => res.id === e.target.id);
-                                if (rMatch !== -1) {
-                                    return {
-                                        title: position.title,
-                                        id: position.id,
-                                        years: position.years,
-                                        responsibilities: position.responsibilities.map((responsibility) => {
-                                            if (responsibility.id === e.target.id) {
-                                                return {
-                                                    text: e.target.value,
-                                                    id: responsibility.id,
-                                                }
-                                            }
-                                            return responsibility;
-                                        })
-                                    }
-                                }
-                                return position;
-                            })
-                        }
-                    }
-                    return company;
-                })
+                }
             })
-        }
-
-        if (e.target.className === 'positionYearFromInput') {
-            this.setState({
-                companies: this.state.companies.map((company) => {
-                    let match = company.positions.findIndex((position) => position.id === e.target.id);
-                    if (match !== -1) {
-                        return {
-                            name: company.name,
-                            id: company.id,
-                            positions: company.positions.map((position) => {
-                                if (position.id === e.target.id) {
-                                    return {
-                                        title: position.title,
-                                        id: position.id,
-                                        years: [e.target.value, position.years[1]],
-                                        responsibilities: position.responsibilities,
-                                    }
-                                }
-                                return position;
-                            })
-                        }
-                    }
-                    return company;
-                })
-            })
-        }
-        if (e.target.className === 'positionYearToInput') {
-            this.setState({
-                companies: this.state.companies.map((company) => {
-                    let match = company.positions.findIndex((position) => position.id === e.target.id);
-                    if (match !== -1) {
-                        return {
-                            name: company.name,
-                            id: company.id,
-                            positions: company.positions.map((position) => {
-                                if (position.id === e.target.id) {
-                                    return {
-                                        title: position.title,
-                                        id: position.id,
-                                        years: [position.years[1], e.target.value],
-                                        responsibilities: position.responsibilities,
-                                    }
-                                }
-                                return position;
-                            })
-                        }
-                    }
-                    return company;
-                })
-            })
-        }
+        })
     }
 
     render() {
         return (
-            <div>
+            <div className="workExperienceBox">
                 <div>
                     <h1>Work Experience</h1>
                 </div>
-                <div>
+                <div className="companiesContainer">
                     {this.state.companies.map((company) => {
                         return <Company
                                     company={company}

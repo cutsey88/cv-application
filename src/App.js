@@ -6,9 +6,11 @@ import Education from './components/education'
 function App() {
   return (
     <div>
-      <PersonalInfo />
-      <WorkExperience />
-      <Education />
+      <form>
+        <PersonalInfo />
+        <WorkExperience />
+        <Education />
+      </form>
     </div>
   );
 }
