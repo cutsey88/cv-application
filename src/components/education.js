@@ -49,19 +49,19 @@ class Education extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="educationBox">
                 <div>
                     <h1>Education</h1>
                 </div>
-                <div>
+                <div className="schoolsContainer">
                     {this.state.schools.map((school) => {
                         return <School
                                     school={school}
                                     key={school.id}
                                     handleInputChange={this.handleInputChange} />
                     })}
-                    <button className="addSchoolButton" onClick={this.addSchool}>Add School</button>
                 </div>
+                <button className="addSchoolButton" onClick={this.addSchool}>Add School</button>
             </div>
         );
     }

@@ -50,6 +50,9 @@ class PersonalInfo extends React.Component {
                             <p className="phoneText">{this.state.phone}</p>
                         </div>
                     </div>
+                    <div className="buttonBox">
+                        <button className="editButton" onClick={this.edit}>Edit</button>
+                    </div>
                 </div>
             );
         }
@@ -74,6 +77,9 @@ class PersonalInfo extends React.Component {
                         value={this.state.phone}
                         onChange={this.handleInputChange} />
                 </div>
+                <div className="buttonBox">
+                        <button className="saveButton" onClick={this.save}>Save</button>
+                    </div>
             </div>
         );
     }

@@ -11,6 +11,25 @@ class CompanyExperience extends React.Component {
         let rbID = 'rb-' + position.id;
         let yFID = 'yf-' + position.id;
         let yTID = 'yt-' + position.id;
+        if (this.props.saved) {
+            return (
+                <div className="positionBox">
+                    <div className="positionNameBox">
+                        <p className="positionNameText">{position.title}</p>
+                    </div>
+                    <div className="positionYearsBox">
+                        <p className="positionYearsText">{position.years[0].concat(' - ', position.years[1])}</p>
+                    </div>
+                    <ul className="responsibilitiesContainer">
+                        {position.responsibilities.map((responsibility) => {
+                            return <li className="responsibilityBox">
+                                        <p className="responsibilityText">{responsibility.text}</p>
+                                </li>
+                        })}
+                    </ul>
+                </div>
+            )
+        }
         return (
             <div className="positionBox">
                 <label>
