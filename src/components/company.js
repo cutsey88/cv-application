@@ -1,5 +1,7 @@
 import React from 'react';
 import CompanyExperience from './companyExperience';
+import '../styles/App.css';
+import '../styles/company.css'
 
 class Company extends React.Component {
     constructor(props) {
@@ -48,23 +50,21 @@ class Company extends React.Component {
                             })}
                     </div>
                     <div className="buttonBox">
-                        <button className="editButton" onClick={this.edit}>Edit</button>
+                        <button className="editButton" onClick={this.edit}>Edit Company</button>
                     </div>
-                    <button className="addPositionButton" id={pbID} onClick={this.props.addPosition}>Add position</button>
                 </div>
             )
         }
         return (
             <div className="companyBox">
-                <label>
-                    Company Name:
-                    <input
-                        type="text"
-                        id={company.id}
-                        className="companyNameInput"
-                        value={company.name}
-                        onChange={this.props.handleInputChange} />
-                </label>
+                <label htmlFor="companyName">Company Name:</label>
+                <input
+                    type="text"
+                    name="companyName"
+                    id={company.id}
+                    className="companyNameInput"
+                    value={company.name}
+                    onChange={this.props.handleInputChange} />
                 <div className="positionsContainer">
                     {company.positions.map((position) => {
                             return (
@@ -78,7 +78,7 @@ class Company extends React.Component {
                         })}
                 </div>
                 <div className="buttonBox">
-                    <button className="saveButton" onClick={this.save}>Save</button>
+                    <button className="saveButton" onClick={this.save}>Save Company</button>
                 </div>
                 <button className="addPositionButton" id={pbID} onClick={this.props.addPosition}>Add position</button>
             </div>

@@ -1,4 +1,6 @@
 import React from 'react';
+import '../styles/App.css';
+import '../styles/school.css';
 
 class School extends React.Component {
     constructor(props) {
@@ -36,11 +38,11 @@ class School extends React.Component {
                     <div className="schoolNameBox">
                         <p className="schoolNameText">{school.name}</p>
                     </div>
-                    <div className="schoolYearsBox">
-                        <p className="schoolYearsText">{school.years[0].concat(' - ', school.years[1])}</p>
-                    </div>
                     <div className="degreeBox">
                         <p className="degreeText">{school.degree}</p>
+                    </div>
+                    <div className="schoolYearsBox">
+                        <p className="schoolYearsText">{school.years[0].concat(' - ', school.years[1])}</p>
                     </div>
                     <div className="buttonBox">
                         <button className="editButton" onClick={this.edit}>Edit</button>
@@ -51,42 +53,38 @@ class School extends React.Component {
         }
         return (
             <div className="schoolBox">
-                <label>
-                    School Name:
-                    <input
-                        type="text"
-                        id={school.id}
-                        className="schoolNameInput"
-                        value={school.name}
-                        onChange={this.props.handleInputChange} />
-                </label>
-                <label>
-                    From:
-                    <input
-                        type="text"
-                        id={yFID}
-                        className="schoolYearFromInput"
-                        value={school.years[0]}
-                        onChange={this.props.handleInputChange} />
-                </label>
-                <label>
-                    To:
-                    <input
-                        type="text"
-                        id={yTID}
-                        className="schoolYearToInput"
-                        value={school.years[1]}
-                        onChange={this.props.handleInputChange} />
-                </label>
-                <label>
-                    Degree/Major:
-                    <input
-                        type="text"
-                        id={dmID}
-                        className="degreeInput"
-                        value={school.degree}
-                        onChange={this.props.handleInputChange} />
-                </label>
+                <label htmlFor="school">School Name:</label>
+                <input
+                    type="text"
+                    id={school.id}
+                    name="school"
+                    className="schoolNameInput"
+                    value={school.name}
+                    onChange={this.props.handleInputChange} />
+                <label htmlFor="degree">Degree/Major:</label>
+                <input
+                    type="text"
+                    id={dmID}
+                    name="degree"
+                    className="degreeInput"
+                    value={school.degree}
+                    onChange={this.props.handleInputChange} />
+                <label htmlFor="from">From:</label>
+                <input
+                    type="tel"
+                    id={yFID}
+                    name="from"
+                    className="schoolYearFromInput"
+                    value={school.years[0]}
+                    onChange={this.props.handleInputChange} />
+                <label htmlFor="to">To:</label>
+                <input
+                    type="tel"
+                    id={yTID}
+                    name="to"
+                    className="schoolYearToInput"
+                    value={school.years[1]}
+                    onChange={this.props.handleInputChange} />
                 <div className="buttonBox">
                     <button className="saveButton" onClick={this.save}>Save</button>
                 </div>

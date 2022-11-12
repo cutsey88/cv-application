@@ -1,7 +1,8 @@
 import React from 'react';
 import Company from './company';
 import uniqid from 'uniqid';
-import { text } from '@fortawesome/fontawesome-svg-core';
+import '../styles/App.css';
+import '../styles/workExperience.css'
 
 class WorkExperience extends React.Component {
     constructor(props) {
@@ -148,7 +149,7 @@ class WorkExperience extends React.Component {
     render() {
         return (
             <div className="workExperienceBox">
-                <div>
+                <div className="headerBox">
                     <h1>Work Experience</h1>
                 </div>
                 <div className="companiesContainer">

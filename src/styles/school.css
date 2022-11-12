@@ -1,0 +1,23 @@
+.schoolBox input {
+    margin: 0px 10px;
+    margin-bottom: 8px;
+}
+
+.schoolBox input[type="text"] {
+    width: 250px;
+    font-size: 16px;
+
+}
+
+.schoolBox input[type="tel"] {
+    width: 70px;
+}
+
+.schoolNameText {
+    font-size: 25px;
+}
+
+.degreeText {
+    font-size: 20px;
+    font-style: italic;
+}

@@ -1,4 +1,6 @@
 import React from 'react';
+import '../styles/App.css';
+import '../styles/companyExperience.css';
 
 class CompanyExperience extends React.Component {
     constructor(props) {
@@ -14,11 +16,13 @@ class CompanyExperience extends React.Component {
         if (this.props.saved) {
             return (
                 <div className="positionBox">
-                    <div className="positionNameBox">
-                        <p className="positionNameText">{position.title}</p>
-                    </div>
-                    <div className="positionYearsBox">
-                        <p className="positionYearsText">{position.years[0].concat(' - ', position.years[1])}</p>
+                    <div className="positionInfoBox">
+                        <div className="positionNameBox">
+                            <p className="positionNameText">{position.title}</p>
+                        </div>
+                        <div className="positionYearsBox">
+                            <p className="positionYearsText">{position.years[0].concat(' - ', position.years[1])}</p>
+                        </div>
                     </div>
                     <ul className="responsibilitiesContainer">
                         {position.responsibilities.map((responsibility) => {
@@ -32,42 +36,46 @@ class CompanyExperience extends React.Component {
         }
         return (
             <div className="positionBox">
-                <label>
-                    Position:
-                    <input
-                        type="text"
-                        id={position.id}
-                        className="positionInput"
-                        value={position.title}
-                        onChange={this.props.handleInputChange} />
-                </label>
-                <label>
-                    From:
-                    <input
-                        type="text"
-                        id={yFID}
-                        className="positionYearFromInput"
-                        value={position.years[0]}
-                        onChange={this.props.handleInputChange} />
-                </label>
-                <label>
-                    To:
-                    <input
-                        type="text"
-                        id={yTID}
-                        className="positionYearToInput"
-                        value={position.years[1]}
-                        onChange={this.props.handleInputChange} />
-                </label>
+                <label htmlFor="position">Position:</label>
+                <input
+                    type="text"
+                    name="position"
+                    id={position.id}
+                    className="positionInput"
+                    value={position.title}
+                    onChange={this.props.handleInputChange} />
+                <label htmlFor="from">From:</label>
+                <input
+                    type="tel"
+                    name="from"
+                    id={yFID}
+                    className="positionYearFromInput"
+                    value={position.years[0]}
+                    onChange={this.props.handleInputChange} />
+                <label htmlFor="to">To:</label>
+                <input
+                    type="tel"
+                    name="to"
+                    id={yTID}
+                    className="positionYearToInput"
+                    value={position.years[1]}
+                    onChange={this.props.handleInputChange} />
                 <div className="responsibilitiesContainer">
                     {position.responsibilities.map((responsibility) => {
-                        return <input
-                                    type="text"
-                                    key={responsibility.id}
-                                    id={responsibility.id}
-                                    className="responsibilityInput"
-                                    value={responsibility.text}
-                                    onChange={this.props.handleInputChange} />
+                        return (
+                                <div className="responsibilityBox">
+                                    <label htmlFor="responsibility">Responsibility:</label>
+                                    <textarea
+                                        type="text"
+                                        name="responsibility"
+                                        key={responsibility.id}
+                                        id={responsibility.id}
+                                        className="responsibilityInput"
+                                        rows={4}
+                                        value={responsibility.text}
+                                        onChange={this.props.handleInputChange}></textarea>
+                                </div>
+                        )
                     })}
                 </div>
                 <button

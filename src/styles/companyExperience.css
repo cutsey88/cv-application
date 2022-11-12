@@ -1,0 +1,33 @@
+.positionBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.positionInfoBox {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.responsibilityBox {
+    display: flex;
+    flex-direction: column;
+}
+
+li.responsibilityBox {
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.responsibilityInput {
+    resize: none;
+    width: 800px !important;
+}
+
+.responsibilityText {
+    width: 700px;
+}
+
+.positionNameText {
+    font-size: 20px;
+    font-style: italic;
+}

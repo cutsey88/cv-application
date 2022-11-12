@@ -1,4 +1,6 @@
 import React from 'react';
+import '../styles/App.css';
+import '../styles/personalInfo.css';
 
 class PersonalInfo extends React.Component {
     constructor(props) {
@@ -36,32 +38,13 @@ class PersonalInfo extends React.Component {
     }
     
     render() {
-        if (this.state.saved) {
-            return (
-                <div className="personalInfoContainer">
-                    <div className="nameBox">
-                        <p className="nameText">{this.state.name}</p>
-                    </div>
-                    <div className="infoBox">
-                        <div className="subInfoBox">
-                            <p className="emailText">{this.state.email}</p>
-                        </div>
-                        <div className="subInfoBox">
-                            <p className="phoneText">{this.state.phone}</p>
-                        </div>
-                    </div>
-                    <div className="buttonBox">
-                        <button className="editButton" onClick={this.edit}>Edit</button>
-                    </div>
-                </div>
-            );
-        }
         return (
             <div className="personalInfoContainer">
                 <div className="nameBox">
                     <input
                         type="text"
                         name="name"
+                        placeholder="Name"
                         value={this.state.name}
                         onChange={this.handleInputChange} />
                 </div>
@@ -69,17 +52,16 @@ class PersonalInfo extends React.Component {
                     <input
                         type="email"
                         name="email"
+                        placeholder="Email"
                         value={this.state.email}
                         onChange={this.handleInputChange} />
                     <input
                         type="tel"
                         name="phone"
+                        placeholder="Phone Number"
                         value={this.state.phone}
                         onChange={this.handleInputChange} />
                 </div>
-                <div className="buttonBox">
-                        <button className="saveButton" onClick={this.save}>Save</button>
-                    </div>
             </div>
         );
     }

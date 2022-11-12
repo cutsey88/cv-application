@@ -1,0 +1,15 @@
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: black 1px solid;
+  height: max-content;
+  min-height: 900px;
+  width: 920px;
+  margin: 20px;
+}
+
+.headerBox {
+  display: flex;
+}

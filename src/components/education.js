@@ -1,6 +1,8 @@
 import React from 'react';
 import School from './school';
 import uniqid from 'uniqid';
+import '../styles/App.css';
+import '../styles/education.css'
 
 class Education extends React.Component {
     constructor(props) {
@@ -50,7 +52,7 @@ class Education extends React.Component {
     render() {
         return (
             <div className="educationBox">
-                <div>
+                <div className="headerBox">
                     <h1>Education</h1>
                 </div>
                 <div className="schoolsContainer">

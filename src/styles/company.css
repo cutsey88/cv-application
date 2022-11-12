@@ -1,0 +1,18 @@
+.companyBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.companyBox input[type="text"] {
+    width: 250px;
+    font-size: 16px;
+
+}
+
+.companyBox input[type="tel"] {
+    width: 70px;
+}
+
+.companyNameText {
+    font-size: 25px;
+}
