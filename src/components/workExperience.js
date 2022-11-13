@@ -15,6 +15,9 @@ class WorkExperience extends React.Component {
         this.addCompany = this.addCompany.bind(this);
         this.addPosition = this.addPosition.bind(this);
         this.addResponsibility = this.addResponsibility.bind(this);
+        this.deleteCompany = this.deleteCompany.bind(this);
+        this.deletePosition = this.deletePosition.bind(this);
+        this.deleteResponsibility = this.deleteResponsibility.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -93,6 +96,64 @@ class WorkExperience extends React.Component {
         })
     }
 
+    deleteCompany(e) {
+        e.preventDefault();
+        let companyID = e.target.id.slice(3);
+        let comps = this.state.companies;
+        let match = this.state.companies.findIndex((company) => company.id === companyID);
+        let newComps = comps.length === 1 ? [] : comps.slice(0, match).concat(comps.slice(match + 1));
+        this.setState({
+            companies: newComps,
+        })
+    }
+
+    deletePosition(e) {
+        e.preventDefault();
+        let positionID = e.target.id.slice(3);
+        this.setState({
+            companies: this.state.companies.map((company) => {
+                let match = company.positions.findIndex((position) => position.id === positionID);
+                if (match === -1) {
+                    return company;
+                }
+                let poses = company.positions;
+                let newPoses = poses.length === 1 ? [] : poses.slice(0, match).concat(poses.slice(match + 1));
+                return {
+                    name: company.name,
+                    id: company.id,
+                    positions: newPoses,
+                }
+            })
+        })
+    }
+
+    deleteResponsibility(e) {
+        e.preventDefault();
+        let resID = e.target.id.slice(3);
+        this.setState({
+            companies: this.state.companies.map((company) => {
+                return {
+                    name: company.name,
+                    id: company.id,
+                    positions: company.positions.map((position) => {
+                        let match = position.responsibilities.findIndex((res) => resID === res.id);
+                        if (match === -1) {
+                            return position;
+                        }
+                        let pRes = position.responsibilities;
+                        let newReses = pRes.length === 1 ? [] : pRes.slice(0, match).concat(pRes.slice(match + 1));
+                        return {
+                            title: position.title,
+                            id: position.id,
+                            years: position.years,
+                            responsibilities: newReses,
+                        }
+                    })
+                }
+            })
+        })
+    }
+
     handleInputChange(e) {
 
         this.setState({
@@ -159,7 +220,10 @@ class WorkExperience extends React.Component {
                                     key={company.id}
                                     handleInputChange={this.handleInputChange}
                                     addPosition={this.addPosition}
-                                    addResponsibility={this.addResponsibility} />
+                                    addResponsibility={this.addResponsibility}
+                                    deleteCompany={this.deleteCompany}
+                                    deletePosition={this.deletePosition}
+                                    deleteResponsibility={this.deleteResponsibility} />
                     })}
                     <button className="addCompanyButton" onClick={this.addCompany}>Add company</button>
                 </div>

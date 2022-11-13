@@ -31,6 +31,7 @@ class Company extends React.Component {
 
         const company = this.props.company;
         let pbID = 'pb-' + company.id;
+        let dcID = 'dc-' + company.id;
         if (this.state.saved) {
             return (
                 <div className="companyBox">
@@ -57,7 +58,10 @@ class Company extends React.Component {
         }
         return (
             <div className="companyBox">
-                <label htmlFor="companyName">Company Name:</label>
+                <label className="companyLabel" htmlFor="companyName">Company Name:</label>
+                <span className="deleteCompanySpan">
+                    <button id={dcID} className="deleteCompanyButton" onClick={this.props.deleteCompany}>Delete</button>
+                </span>
                 <input
                     type="text"
                     name="companyName"
@@ -73,14 +77,16 @@ class Company extends React.Component {
                                     key={position.id}
                                     saved={this.saved}
                                     handleInputChange={this.props.handleInputChange}
-                                    addResponsibility={this.props.addResponsibility} />
+                                    addResponsibility={this.props.addResponsibility}
+                                    deletePosition={this.props.deletePosition}
+                                    deleteResponsibility={this.props.deleteResponsibility} />
                             )
                         })}
                 </div>
                 <div className="buttonBox">
                     <button className="saveButton" onClick={this.save}>Save Company</button>
+                    <button className="addPositionButton" id={pbID} onClick={this.props.addPosition}>Add position</button>
                 </div>
-                <button className="addPositionButton" id={pbID} onClick={this.props.addPosition}>Add position</button>
             </div>
         );
     }

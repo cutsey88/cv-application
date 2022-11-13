@@ -13,6 +13,7 @@ class CompanyExperience extends React.Component {
         let rbID = 'rb-' + position.id;
         let yFID = 'yf-' + position.id;
         let yTID = 'yt-' + position.id;
+        let dpID = 'dp-' + position.id;
         if (this.props.saved) {
             return (
                 <div className="positionBox">
@@ -26,9 +27,9 @@ class CompanyExperience extends React.Component {
                     </div>
                     <ul className="responsibilitiesContainer">
                         {position.responsibilities.map((responsibility) => {
-                            return <li className="responsibilityBox">
+                            return  <li key={responsibility.id} className="responsibilityBox">
                                         <p className="responsibilityText">{responsibility.text}</p>
-                                </li>
+                                    </li>
                         })}
                     </ul>
                 </div>
@@ -36,7 +37,10 @@ class CompanyExperience extends React.Component {
         }
         return (
             <div className="positionBox">
-                <label htmlFor="position">Position:</label>
+                <label className="positionLabel" htmlFor="position">Position:</label>
+                <span className="deletePositionSpan">
+                    <button id={dpID} className="deletePositionButton" onClick={this.props.deletePosition}>Delete</button>
+                </span>
                 <input
                     type="text"
                     name="position"
@@ -62,9 +66,13 @@ class CompanyExperience extends React.Component {
                     onChange={this.props.handleInputChange} />
                 <div className="responsibilitiesContainer">
                     {position.responsibilities.map((responsibility) => {
+                        let drID = 'dr-' + responsibility.id;
                         return (
-                                <div className="responsibilityBox">
-                                    <label htmlFor="responsibility">Responsibility:</label>
+                                <div key={drID} className="responsibilityBox">
+                                    <label className="responsibilityLabel" htmlFor="responsibility">Responsibility:</label>
+                                    <span className="deleteResponsibilitySpan">
+                                        <button id={drID} className="deleteResponsibilityButton" onClick={this.props.deleteResponsibility}>Delete</button>
+                                    </span>
                                     <textarea
                                         type="text"
                                         name="responsibility"

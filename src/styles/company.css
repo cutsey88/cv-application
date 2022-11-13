@@ -16,3 +16,16 @@
 .companyNameText {
     font-size: 25px;
 }
+
+.deleteCompanySpan {
+    position: relative;
+    left: 123px;
+}
+
+.companyLabel {
+    position: absolute;
+}
+
+.buttonBox {
+    margin-bottom: 8px;
+}

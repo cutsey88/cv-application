@@ -12,6 +12,7 @@ class Education extends React.Component {
             schools: [],
         }
         this.addSchool = this.addSchool.bind(this);
+        this.deleteSchool = this.deleteSchool.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -24,6 +25,17 @@ class Education extends React.Component {
                 years: ['', ''],
                 degree: '',
             })
+        })
+    }
+
+    deleteSchool(e) {
+        e.preventDefault();
+        let schoolID = e.target.id.slice(3);
+        let schools = this.state.schools;
+        let match = schools.findIndex((school) => schoolID === school.id);
+        let newSchools = schools.length === 1 ? [] : schools.slice(0, match).concat(schools.slice(match + 1));
+        this.setState({
+            schools: newSchools,
         })
     }
 
@@ -60,6 +72,7 @@ class Education extends React.Component {
                         return <School
                                     school={school}
                                     key={school.id}
+                                    deleteSchool={this.deleteSchool}
                                     handleInputChange={this.handleInputChange} />
                     })}
                 </div>

@@ -32,6 +32,7 @@ class School extends React.Component {
         let yFID = 'yf-' + school.id;
         let yTID = 'yt-' + school.id;
         let dmID = 'dm-' + school.id;
+        let dsID = 'ds-' + school.id;
         if (this.state.saved) {
             return (
                 <div className="schoolBox">
@@ -87,6 +88,7 @@ class School extends React.Component {
                     onChange={this.props.handleInputChange} />
                 <div className="buttonBox">
                     <button className="saveButton" onClick={this.save}>Save</button>
+                    <button id={dsID} className="deleteButton" onClick={this.props.deleteSchool}>Delete</button>
                 </div>
             </div>
         );

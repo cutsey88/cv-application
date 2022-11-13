@@ -1,6 +1,7 @@
 .positionBox {
     display: flex;
     flex-direction: column;
+    margin: 8px 0px;
 }
 
 .positionInfoBox {
@@ -11,6 +12,7 @@
 div.responsibilityBox {
     display: flex;
     flex-direction: column;
+    margin-bottom: 8px;
 }
 
 li.responsibilityBox {
@@ -21,6 +23,7 @@ li.responsibilityBox {
 .responsibilityInput {
     resize: none;
     width: 800px !important;
+    margin-top: 3px;
 }
 
 .responsibilityText {
@@ -30,4 +33,22 @@ li.responsibilityBox {
 .positionNameText {
     font-size: 20px;
     font-style: italic;
+}
+
+.deleteResponsibilitySpan {
+    position: relative;
+    left: 110px;
+}
+
+.responsibilityLabel {
+    position: absolute;
+}
+
+.deletePositionSpan {
+    position: relative;
+    left: 68px;
+}
+
+.positionLabel {
+    position: absolute;
 }

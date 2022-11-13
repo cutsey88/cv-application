@@ -5,3 +5,12 @@
 .workExperienceBox .headerBox {
     margin: 8px 0px;
 }
+
+.workExperienceBox input {
+    margin-top: 3px;
+    margin-bottom: 8px;
+}
+
+.addCompanyButton {
+    margin-top: 3px;
+}
