@@ -1,30 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Company from './company';
 import uniqid from 'uniqid';
 import '../styles/App.css';
 import '../styles/workExperience.css'
 
-class WorkExperience extends React.Component {
-    constructor(props) {
-        super(props)
+function WorkExperience() {
 
-        this.state = {
-            companies: [],
-        }
+    const [companies, setCompanies] = useState([]);
 
-        this.addCompany = this.addCompany.bind(this);
-        this.addPosition = this.addPosition.bind(this);
-        this.addResponsibility = this.addResponsibility.bind(this);
-        this.deleteCompany = this.deleteCompany.bind(this);
-        this.deletePosition = this.deletePosition.bind(this);
-        this.deleteResponsibility = this.deleteResponsibility.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
-
-    addCompany(e) {
+    function addCompany(e) {
         e.preventDefault();
-        this.setState({
-            companies: this.state.companies.concat({
+        setCompanies(
+            companies.concat({
                 name: '',
                 id: uniqid(),
                 positions: [{
@@ -37,14 +24,14 @@ class WorkExperience extends React.Component {
                     }],
                 }],
             })
-        });
+        );
     }
 
-    addPosition(e) {
+    function addPosition(e) {
         e.preventDefault();
         let companyID = e.target.id.slice(3);
-        this.setState({
-            companies: this.state.companies.map((company) => {
+        setCompanies(
+            companies.map((company) => {
                 if (company.id === companyID) {
                     return {
                         name: company.name,
@@ -62,14 +49,14 @@ class WorkExperience extends React.Component {
                 }
                 return company;
             })
-        })
+        )
     }
 
-    addResponsibility(e) {
+    function addResponsibility(e) {
         e.preventDefault();
         let positionID = e.target.id.slice(3);
-        this.setState({
-            companies: this.state.companies.map((company) => {
+        setCompanies(
+            companies.map((company) => {
                 let match = company.positions.findIndex((position) => position.id === positionID);
                 if (match !== -1) {
                     return {
@@ -93,25 +80,22 @@ class WorkExperience extends React.Component {
                 }
                 return company;
             })
-        })
+        )
     }
 
-    deleteCompany(e) {
+    function deleteCompany(e) {
         e.preventDefault();
         let companyID = e.target.id.slice(3);
-        let comps = this.state.companies;
-        let match = this.state.companies.findIndex((company) => company.id === companyID);
-        let newComps = comps.length === 1 ? [] : comps.slice(0, match).concat(comps.slice(match + 1));
-        this.setState({
-            companies: newComps,
-        })
+        let match = companies.findIndex((company) => company.id === companyID);
+        let newComps = companies.length === 1 ? [] : companies.slice(0, match).concat(companies.slice(match + 1));
+        setCompanies(newComps);
     }
 
-    deletePosition(e) {
+    function deletePosition(e) {
         e.preventDefault();
         let positionID = e.target.id.slice(3);
-        this.setState({
-            companies: this.state.companies.map((company) => {
+        setCompanies(
+            companies.map((company) => {
                 let match = company.positions.findIndex((position) => position.id === positionID);
                 if (match === -1) {
                     return company;
@@ -124,14 +108,14 @@ class WorkExperience extends React.Component {
                     positions: newPoses,
                 }
             })
-        })
+        );
     }
 
-    deleteResponsibility(e) {
+    function deleteResponsibility(e) {
         e.preventDefault();
         let resID = e.target.id.slice(3);
-        this.setState({
-            companies: this.state.companies.map((company) => {
+        setCompanies(
+            companies.map((company) => {
                 return {
                     name: company.name,
                     id: company.id,
@@ -151,13 +135,12 @@ class WorkExperience extends React.Component {
                     })
                 }
             })
-        })
+        );
     }
 
-    handleInputChange(e) {
-
-        this.setState({
-            companies: this.state.companies.map((company) => {
+    function handleInputChange(e) {
+        setCompanies(
+            companies.map((company) => {
                 let companyID = e.target.id === company.id ? company.id : null;
                 if (companyID) {
                     return {
@@ -204,32 +187,30 @@ class WorkExperience extends React.Component {
                     })
                 }
             })
-        })
-    }
-
-    render() {
-        return (
-            <div className="workExperienceBox">
-                <div className="headerBox">
-                    <h1>Work Experience</h1>
-                </div>
-                <div className="companiesContainer">
-                    {this.state.companies.map((company) => {
-                        return <Company
-                                    company={company}
-                                    key={company.id}
-                                    handleInputChange={this.handleInputChange}
-                                    addPosition={this.addPosition}
-                                    addResponsibility={this.addResponsibility}
-                                    deleteCompany={this.deleteCompany}
-                                    deletePosition={this.deletePosition}
-                                    deleteResponsibility={this.deleteResponsibility} />
-                    })}
-                    <button className="addCompanyButton" onClick={this.addCompany}>Add company</button>
-                </div>
-            </div>
         );
     }
+
+    return (
+        <div className="workExperienceBox">
+            <div className="headerBox">
+                <h1>Work Experience</h1>
+            </div>
+            <div className="companiesContainer">
+                {companies.map((company) => {
+                    return <Company
+                                company={company}
+                                key={company.id}
+                                handleInputChange={handleInputChange}
+                                addPosition={addPosition}
+                                addResponsibility={addResponsibility}
+                                deleteCompany={deleteCompany}
+                                deletePosition={deletePosition}
+                                deleteResponsibility={deleteResponsibility} />
+                })}
+                <button className="addCompanyButton" onClick={addCompany}>Add company</button>
+            </div>
+        </div>
+    );
 }
 
 export default WorkExperience;

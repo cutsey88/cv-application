@@ -1,47 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import School from './school';
 import uniqid from 'uniqid';
 import '../styles/App.css';
 import '../styles/education.css'
 
-class Education extends React.Component {
-    constructor(props) {
-        super(props)
+function Education() {
 
-        this.state = {
-            schools: [],
-        }
-        this.addSchool = this.addSchool.bind(this);
-        this.deleteSchool = this.deleteSchool.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
+    const [schools, setSchools] = useState([]);
 
-    addSchool(e) {
+    function addSchool(e) {
         e.preventDefault();
-        this.setState({
-            schools: this.state.schools.concat({
+        setSchools(
+            schools.concat({
                 name: '',
                 id: uniqid(),
                 years: ['', ''],
                 degree: '',
             })
-        })
+        );
     }
 
-    deleteSchool(e) {
+    function deleteSchool(e) {
         e.preventDefault();
         let schoolID = e.target.id.slice(3);
-        let schools = this.state.schools;
         let match = schools.findIndex((school) => schoolID === school.id);
         let newSchools = schools.length === 1 ? [] : schools.slice(0, match).concat(schools.slice(match + 1));
-        this.setState({
-            schools: newSchools,
-        })
+        setSchools(newSchools);
     }
 
-    handleInputChange(e) {
-        this.setState({
-            schools: this.state.schools.map((school) => {
+    function handleInputChange(e) {
+        setSchools(
+            schools.map((school) => {
                 let schoolID = e.target.id === school.id || e.target.id.slice(3) === school.id ? school.id : null;
                 let idType = e.target.id.slice(2, 3) === '-' ? e.target.id.slice(0, 3) : 'main';
                 let yearCheck = school.years;
@@ -58,28 +47,29 @@ class Education extends React.Component {
                 }
                 return school;
             })
-        })
+        )
     }
 
-    render() {
-        return (
-            <div className="educationBox">
-                <div className="headerBox">
-                    <h1>Education</h1>
+    
+    return (
+        <div className="educationBox">
+            <div className="headerBox">
+                <h1>Education</h1>
+            </div>
+            <div className="schoolsContainer">
+                {schools.map((school) => {
+                    return (
+                        <School
+                            school={school}
+                            key={school.id}
+                            deleteSchool={deleteSchool}
+                            handleInputChange={handleInputChange} />
+                            )
+                })}
                 </div>
-                <div className="schoolsContainer">
-                    {this.state.schools.map((school) => {
-                        return <School
-                                    school={school}
-                                    key={school.id}
-                                    deleteSchool={this.deleteSchool}
-                                    handleInputChange={this.handleInputChange} />
-                    })}
-                </div>
-                <button className="addSchoolButton" onClick={this.addSchool}>Add School</button>
+                <button className="addSchoolButton" onClick={addSchool}>Add School</button>
             </div>
         );
-    }
-}
+};
 
 export default Education;

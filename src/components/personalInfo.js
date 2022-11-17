@@ -1,70 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/App.css';
 import '../styles/personalInfo.css';
 
-class PersonalInfo extends React.Component {
-    constructor(props) {
-        super(props)
+function PersonalInfo() {
 
-        this.state = {
-            name: '',
-            email: '',
-            phone: '',
-            saved: false,
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+
+    function handleInputChange(e) {
+        if (e.target.name === "name") {
+            setName(e.target.value);
+        } else if (e.target.name === "email") {
+            setEmail(e.target.value);
+        } else if (e.target.name === "phone") {
+            setPhone(e.target.value);
         }
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.save = this.save.bind(this);
-        this.edit = this.edit.bind(this);
-    }
-
-    handleInputChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
-    save(e) {
-        e.preventDefault();
-        this.setState({
-            saved: true,
-        })
-    }
-
-    edit(e) {
-        e.preventDefault();
-        this.setState({
-            saved: false,
-        })
     }
     
-    render() {
-        return (
-            <div className="personalInfoContainer">
-                <div className="nameBox">
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                        value={this.state.name}
-                        onChange={this.handleInputChange} />
-                </div>
-                <div className="infoBox">
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChange={this.handleInputChange} />
-                    <input
-                        type="tel"
-                        name="phone"
-                        placeholder="Phone Number"
-                        value={this.state.phone}
-                        onChange={this.handleInputChange} />
-                </div>
+    return (
+        <div className="personalInfoContainer">
+            <div className="nameBox">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    value={name}
+                    onChange={handleInputChange} />
             </div>
-        );
-    }
+            <div className="infoBox">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleInputChange} />
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={phone}
+                    onChange={handleInputChange} />
+            </div>
+        </div>
+    );
 }
 
 export default PersonalInfo;
