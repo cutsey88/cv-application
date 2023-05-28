@@ -30,7 +30,7 @@ function CompanyExperience(props) {
     }
     return (
         <div className="positionBox">
-            <label className="positionLabel" htmlFor="position">Position:</label>
+            <label className="positionLabel" htmlFor={position.id}>Position:</label>
             <span className="deletePositionSpan">
                 <button id={dpID} className="deletePositionButton" onClick={props.deletePosition}>Delete</button>
             </span>
@@ -41,7 +41,7 @@ function CompanyExperience(props) {
                 className="positionInput"
                 value={position.title}
                 onChange={props.handleInputChange} />
-            <label htmlFor="from">From:</label>
+            <label htmlFor={yFID}>From:</label>
             <input
                 type="tel"
                 name="from"
@@ -49,7 +49,7 @@ function CompanyExperience(props) {
                 className="positionYearFromInput"
                 value={position.years[0]}
                 onChange={props.handleInputChange} />
-            <label htmlFor="to">To:</label>
+            <label htmlFor={yTID}>To:</label>
             <input
                 type="tel"
                 name="to"
@@ -62,7 +62,7 @@ function CompanyExperience(props) {
                     let drID = 'dr-' + responsibility.id;
                     return (
                             <div key={drID} className="responsibilityBox">
-                                <label className="responsibilityLabel" htmlFor="responsibility">Responsibility:</label>
+                                <label className="responsibilityLabel" htmlFor={responsibility.id}>Responsibility:</label>
                                 <span className="deleteResponsibilitySpan">
                                     <button id={drID} className="deleteResponsibilityButton" onClick={props.deleteResponsibility}>Delete</button>
                                 </span>

@@ -1,15 +1,29 @@
+.contentBox {
+  display: flex;
+  justify-content: center;
+}
 
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   border: black 1px solid;
   height: max-content;
-  min-height: 900px;
-  width: 920px;
-  margin: 20px;
+  min-height: 80vh;
+  width: 45vw;
+  margin: 3vh 3vw;
 }
 
 .headerBox {
   display: flex;
+  margin: 8px 0px;
+}
+
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  border: black 1px solid;
+  height: max-content;
+  min-height: 80vh;
+  width: 45vw;
+  margin: 3vh 3vw;
 }

@@ -9,6 +9,10 @@
     justify-content: space-between;
 }
 
+.positionYearsBox {
+    padding-right: 2rem;
+}
+
 div.responsibilityBox {
     display: flex;
     flex-direction: column;

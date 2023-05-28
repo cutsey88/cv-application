@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CompanyExperience from './companyExperience';
 import '../styles/App.css';
 import '../styles/company.css'
@@ -11,6 +11,14 @@ function Company(props) {
         e.preventDefault();
         saved ? setSaved(false) : setSaved(true);
     }
+
+    useEffect(() => {
+        if (saved) {
+            props.updatePreview();
+        }
+    }, [saved])
+
+
 
     const company = props.company;
     let pbID = 'pb-' + company.id;
@@ -28,8 +36,7 @@ function Company(props) {
                                     position={position}
                                     key={position.id}
                                     saved={saved}
-                                    handleInputChange={props.handleInputChange}
-                                    addResponsibility={props.addResponsibility} />
+                                    handleInputChange={props.handleInputChange} />
                             )
                         })}
                 </div>
@@ -41,7 +48,7 @@ function Company(props) {
     }
     return (
         <div className="companyBox">
-            <label className="companyLabel" htmlFor="companyName">Company Name:</label>
+            <label className="companyLabel" htmlFor={company.id}>Company Name:</label>
             <span className="deleteCompanySpan">
                 <button id={dcID} className="deleteCompanyButton" onClick={props.deleteCompany}>Delete</button>
             </span>

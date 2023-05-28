@@ -1,7 +1,4 @@
-.educationBox {
-    width: 800px;
-}
-
-.educationBox .headerBox {
-    margin: 8px 0px;
+.educationBox,
+.educationContainer {
+    padding-left: 2rem;
 }

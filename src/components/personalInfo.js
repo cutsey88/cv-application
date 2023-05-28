@@ -2,21 +2,7 @@ import React, { useState } from 'react';
 import '../styles/App.css';
 import '../styles/personalInfo.css';
 
-function PersonalInfo() {
-
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-
-    function handleInputChange(e) {
-        if (e.target.name === "name") {
-            setName(e.target.value);
-        } else if (e.target.name === "email") {
-            setEmail(e.target.value);
-        } else if (e.target.name === "phone") {
-            setPhone(e.target.value);
-        }
-    }
+function PersonalInfo(props) {
     
     return (
         <div className="personalInfoContainer">
@@ -25,22 +11,22 @@ function PersonalInfo() {
                     type="text"
                     name="name"
                     placeholder="Name"
-                    value={name}
-                    onChange={handleInputChange} />
+                    value={props.name}
+                    onChange={props.handleInputChange} />
             </div>
             <div className="infoBox">
                 <input
                     type="email"
                     name="email"
                     placeholder="Email"
-                    value={email}
-                    onChange={handleInputChange} />
+                    value={props.email}
+                    onChange={props.handleInputChange} />
                 <input
                     type="tel"
                     name="phone"
                     placeholder="Phone Number"
-                    value={phone}
-                    onChange={handleInputChange} />
+                    value={props.phone}
+                    onChange={props.handleInputChange} />
             </div>
         </div>
     );

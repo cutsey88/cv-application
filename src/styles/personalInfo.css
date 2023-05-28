@@ -2,14 +2,21 @@
     margin: 0;
 }
 
+.personalInfoContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .personalInfoContainer input {
     border: none;
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
-.personalInfoContainer input[type="text"] {
-    width: 400px;
+.personalInfoContainer input[type="text"],
+.previewName {
+    width: 50%;
     height: 30px;
     font-size: 30px;
     padding: 4px 6px;
@@ -28,16 +35,9 @@
     color: black;
 }
 
-.personalInfoContainer {
-    display: flex;
-    flex-direction: column;
-
-}
-
 .personalInfoContainer .nameBox {
     display: flex;
     justify-content: center;
-    width: 800px;
     height: max-content;
     margin-top: 10px;
 }

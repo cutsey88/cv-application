@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 import '../styles/App.css';
 import '../styles/education.css'
 
-function Education() {
+function Education(props) {
 
     const [schools, setSchools] = useState([]);
 
@@ -50,7 +50,10 @@ function Education() {
         )
     }
 
-    
+    function updatePreview() {
+        props.updatePreviewEducation(schools);
+    }
+
     return (
         <div className="educationBox">
             <div className="headerBox">
@@ -63,12 +66,13 @@ function Education() {
                             school={school}
                             key={school.id}
                             deleteSchool={deleteSchool}
-                            handleInputChange={handleInputChange} />
+                            handleInputChange={handleInputChange}
+                            updatePreview={updatePreview} />
                             )
                 })}
-                </div>
-                <button className="addSchoolButton" onClick={addSchool}>Add School</button>
             </div>
+            <button className="addSchoolButton" onClick={addSchool}>Add School</button>
+        </div>
         );
 };
 

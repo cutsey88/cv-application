@@ -1,9 +1,6 @@
-.workExperienceBox {
-    width: 800px;
-}
-
-.workExperienceBox .headerBox {
-    margin: 8px 0px;
+.workExperienceBox,
+.workExperienceContainer {
+    padding-left: 2rem;
 }
 
 .workExperienceBox input {

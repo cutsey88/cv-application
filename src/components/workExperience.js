@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 import '../styles/App.css';
 import '../styles/workExperience.css'
 
-function WorkExperience() {
+function WorkExperience(props) {
 
     const [companies, setCompanies] = useState([]);
 
@@ -190,6 +190,10 @@ function WorkExperience() {
         );
     }
 
+    function updatePreview() {
+        props.updatePreviewCompanies(companies);
+    }
+
     return (
         <div className="workExperienceBox">
             <div className="headerBox">
@@ -205,7 +209,8 @@ function WorkExperience() {
                                 addResponsibility={addResponsibility}
                                 deleteCompany={deleteCompany}
                                 deletePosition={deletePosition}
-                                deleteResponsibility={deleteResponsibility} />
+                                deleteResponsibility={deleteResponsibility}
+                                updatePreview={updatePreview} />
                 })}
                 <button className="addCompanyButton" onClick={addCompany}>Add company</button>
             </div>

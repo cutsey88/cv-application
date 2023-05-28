@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/App.css';
 import '../styles/school.css';
 
@@ -10,6 +10,12 @@ function School(props) {
         e.preventDefault();
         saved ? setSaved(false) : setSaved(true);
     }
+
+    useEffect(() => {
+        if (saved) {
+            props.updatePreview();
+        }
+    }, [saved])
 
     const school = props.school;
     let yFID = 'yf-' + school.id;
@@ -32,12 +38,11 @@ function School(props) {
                     <button className="editButton" onClick={changeSaved}>Edit</button>
                 </div>
             </div>
-            
         )
     }
     return (
         <div className="schoolBox">
-            <label htmlFor="school">School Name:</label>
+            <label htmlFor={school.id}>School Name:</label>
             <input
                 type="text"
                 id={school.id}
@@ -45,7 +50,7 @@ function School(props) {
                 className="schoolNameInput"
                 value={school.name}
                 onChange={props.handleInputChange} />
-            <label htmlFor="degree">Degree/Major:</label>
+            <label htmlFor={dmID}>Degree/Major:</label>
             <input
                 type="text"
                 id={dmID}
@@ -53,7 +58,7 @@ function School(props) {
                 className="degreeInput"
                 value={school.degree}
                 onChange={props.handleInputChange} />
-            <label htmlFor="from">From:</label>
+            <label htmlFor={yFID}>From:</label>
             <input
                 type="tel"
                 id={yFID}
@@ -61,7 +66,7 @@ function School(props) {
                 className="schoolYearFromInput"
                 value={school.years[0]}
                 onChange={props.handleInputChange} />
-            <label htmlFor="to">To:</label>
+            <label htmlFor={yTID}>To:</label>
             <input
                 type="tel"
                 id={yTID}
